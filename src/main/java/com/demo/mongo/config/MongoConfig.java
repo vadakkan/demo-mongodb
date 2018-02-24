@@ -17,6 +17,12 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
     @Value("${spring.data.mongodb.database}")
     private String mongoDB;
+    @Value("${spring.data.mongodb.host}")
+    private String mongoHost;
+
+    @Value("${spring.data.mongodb.port}")
+    private String mongoPort;
+
 
     @Override
     public MongoMappingContext mongoMappingContext()
@@ -27,8 +33,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     @Bean
     public MongoClient mongoClient() {
-        //    return new MongoClient("127.0.0.1", 27017); we can specify ip and port
-        return new MongoClient();
+        return new MongoClient(mongoHost + ":" + mongoPort);
     }
 
     @Override
